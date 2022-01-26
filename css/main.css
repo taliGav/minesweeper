@@ -1,0 +1,24 @@
+body {
+    text-align: center;
+    background-color: lightyellow;
+}
+
+table {
+    margin-top: 20px;
+    margin: auto;
+    border: 2px solid black;
+}
+
+.level-container{
+    margin: 30px;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    line-height:50px;
+    text-align: center;
+    font-size: 2em;
+    border: 2px solid black;
+
+}

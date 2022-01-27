@@ -1,6 +1,8 @@
 'use strict'
 
-var gBoard = buildBoard();
+var gBoard;
+var gCurrSize;
+var gLevel;
 
 var gLevels = [{
     SIZE: 4,
@@ -13,6 +15,8 @@ var gLevels = [{
     MINES: 30
 }];
 
+var gMinesPos = [];
+
 var gGame = {
     isOn: false,
     shownCount: 0,
@@ -20,79 +24,44 @@ var gGame = {
     secsPassed: 0
 }
 
-var cell = {
-    minesAroundCount: null,
-    isShown: true,
-    isMine: false,
-    isMarked: false
-}
+// 0 left 2 right
+// function WhichButton(event) {
+//     alert(event.button)
+//   }
 
-function initGame() {
+function initGame(gCurrSize) {
+    gBoard = buildBoard(gCurrSize);
+    console.log(gBoard);
     renderBoard(gBoard, '.board-container');
+    createMines(gLevel);
+    renderMines();
+    console.log('negs count', setMinesNegsCount(gBoard, 1, 1));
+    console.log('negs count', setMinesNegsCount(gBoard, 3, 3));
+
+    setMineCountToCell();
+
+    gGame.isOn = true;
 }
 
 
 
 
-
-function cellClicked(elCell, i, j) {
-
+function changeLevel(num) {
+    gCurrSize = gLevels[num].SIZE;
+    gLevel = num;
+    initGame(gCurrSize)
+    console.log(gBoard);
 }
 
-function cellMarked(elCell) {
-
-}
 
 function checkGameOver() {
 
 }
 
-function expandShown(board, elCell, i, j) {
-
-}
 
 
-function buildBoard(size=4) {
-    var board = [];
-    for (var i = 0; i < size; i++) {
-        board.push([]);
-        for (var j = 0; j < size; j++) {
-            var cell = {
-                minesAroundCount: null,
-                isShown: true,
-                isMine: false,
-                isMarked: true
-            }
 
-            board[i][j] = cell;
-
-            // cell.minesAroundCount = setMinesNegsCount(board, i, j)
-        }
-    }
-
-    console.table(board);
-    return board;
-}
-
-// cell.minesAroundCount = (!cell.isMine) ? setMinesNegsCount(gBoard, i, j) : '';
+function restartGame() {
 
 
-function setMinesNegsCount(board, rowIdx, colIdx) {
-    var count = 0
-    for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
-        if (i < 0 || i > gLevel.SIZE - 1) continue
-        for (var j = colIdx - 1; j <= colIdx + 1; j++) {
-            if (j < 0 || j > gLevel.SIZE - 1) continue
-            if (i === rowIdx && j === colIdx) continue
-            var currCell = board[i][j]
-            if (currCell.isMine === true) count++
-        }
-    }
-    return count
-}
-
-function changeLevel(num) {
-    var size=gLevels[num].SIZE;
-    gBoard=buildBoard(size);
-    initGame();
 }

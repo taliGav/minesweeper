@@ -1,5 +1,35 @@
 'use strict'
+var bomb1 = '&#x1F4A3';
 
+
+function buildBoard(size = 4) {
+  var board = [];
+  for (var i = 0; i < size; i++) {
+    board.push([]);
+    for (var j = 0; j < size; j++) {
+      var cell = {
+        minesAroundCount: ' ',
+        isShown: false,
+        isMine: false,
+        isMarked: false,
+        gameElement: ' '
+      }
+      board[i][j] = cell;
+    }
+  }
+
+  // board[0][0].isShown = true
+  // board[0][0].isMine = true
+  // board[0][0].gameElement = BOMB2
+
+  // board[2][2].isShown = true
+  // board[2][2].isMine = true
+  // board[2][2].gameElement = BOMB2
+
+  console.table(board);
+
+  return board;
+}
 
 
 
@@ -8,10 +38,9 @@ function renderBoard(board, selector) {
   for (var i = 0; i < board.length; i++) {
     strHTML += '<tr>';
     for (var j = 0; j < board[0].length; j++) {
-      board[i][j] = '';
-      var cell = board[i][j];
+      var cell = '';
       var className = 'cell cell-' + i + '-' + j;
-      strHTML += '<td class="' + className + '"> ' + cell + ' </td>'
+      strHTML += '<td onmousedown="WhichButton(event)" class="' + className + '"> ' + cell + ' </td>'
     }
     strHTML += '</tr>'
   }
@@ -22,10 +51,11 @@ function renderBoard(board, selector) {
 
 
 // location such as: {i: 2, j: 7}
-function renderCell(location, value) {
+function renderCell(location) {
   // Select the elCell and set the value
+  var gameElement = gBoard[location.i][location.j].gameElement;
   var elCell = document.querySelector(`.cell-${location.i}-${location.j}`);
-  elCell.innerHTML = value;
+  elCell.innerHTML = gameElement;
 }
 
 
@@ -45,10 +75,6 @@ function renderCell(location, value) {
 // }
 
 
-
-function getRandomIntInclusive(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 function getEmptyCells() {
   var res = [];
@@ -70,18 +96,6 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 }
 
-// function shuffle(items) {
-//   console.log('items:', items);
-//   var randIdx, keep, i;
-//   for (i = items.length - 1; i > 0; i--) {
-//     randIdx = getRandomInt(0, items.length - 1);
-
-//     keep = items[i];
-//     items[i] = items[randIdx];
-//     items[randIdx] = keep;
-//   }
-//   return items;
-// }
 
 
 // oncontextmenu = "cellMarked(this, ${i}, ${j})";

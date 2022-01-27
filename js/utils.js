@@ -1,6 +1,4 @@
 'use strict'
-var bomb1 = '&#x1F4A3';
-
 
 function buildBoard(size = 4) {
   var board = [];
@@ -12,22 +10,11 @@ function buildBoard(size = 4) {
         isShown: false,
         isMine: false,
         isMarked: false,
-        gameElement: ' '
       }
       board[i][j] = cell;
     }
   }
-
-  // board[0][0].isShown = true
-  // board[0][0].isMine = true
-  // board[0][0].gameElement = BOMB2
-
-  // board[2][2].isShown = true
-  // board[2][2].isMine = true
-  // board[2][2].gameElement = BOMB2
-
   console.table(board);
-
   return board;
 }
 
@@ -40,7 +27,7 @@ function renderBoard(board, selector) {
     for (var j = 0; j < board[0].length; j++) {
       var cell = '';
       var className = 'cell cell-' + i + '-' + j;
-      strHTML += '<td onmousedown="WhichButton(event)" class="' + className + '"> ' + cell + ' </td>'
+      strHTML += `<td onclick="cellClicked(this, ${i}, ${j})"class="cell ${className}"> ${cell} </td>`
     }
     strHTML += '</tr>'
   }
@@ -50,30 +37,10 @@ function renderBoard(board, selector) {
 }
 
 
-// location such as: {i: 2, j: 7}
-function renderCell(location) {
-  // Select the elCell and set the value
-  var gameElement = gBoard[location.i][location.j].gameElement;
+function renderCell(location, value) {
   var elCell = document.querySelector(`.cell-${location.i}-${location.j}`);
-  elCell.innerHTML = gameElement;
+  elCell.innerHTML = value;
 }
-
-
-
-// function countNegsAround(mat, rowIdx, colIdx) {
-//   var count = 0
-//   for (var i = rowIdx - 1; i <= rowIdx + 1; i++) { // 0 //1
-//     if (i < 0 || i > mat.length - 1) continue
-//     for (var j = colIdx - 1; j <= colIdx + 1; j++) { // 0 //1
-//       if (j < 0 || j > mat[0].length - 1) continue  
-//       if (i === rowIdx && j === colIdx) continue 
-//       var currCell = mat[i][j]  //mat 1 1
-//       if (currCell.isMine === true) count++
-//     }
-//   }
-//   return count
-// }
-
 
 
 function getEmptyCells() {
@@ -87,7 +54,6 @@ function getEmptyCells() {
   }
   return res;
 }
-
 
 
 function getRandomInt(min, max) {

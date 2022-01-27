@@ -1,7 +1,7 @@
 body {
     text-align: center;
     background-color: lightyellow;
-    background: rgba(231, 189, 110, 0.856) url("../img/idfmine.jpg") center top/cover no-repeat;
+    background: rgba(231, 189, 110, 0.856) url(../img/idfmine.jpg) center top/cover no-repeat;
 
     font-family: Lucida Handwriting, Cursive;
 
@@ -15,6 +15,8 @@ h1 {
 
 table {
     margin-top: 40px;
+    width: 650px;
+    height: 650px;
     margin: auto;
     table-layout: fixed;
     /* border: 2px solid black; */
@@ -28,14 +30,14 @@ button {
 }
 
 .level-container {
-    margin: 30px;
+    margin: 15px;
 }
 
 .cell {
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    display: inline-block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    /* display: inline-block; */
     text-align: center;
     font-size: 2em;
     border: 2px solid black;

@@ -4,6 +4,7 @@ var gBoard;
 var gCurrSize;
 var gLevel;
 
+
 var gLevels = [{
     SIZE: 4,
     MINES: 2
@@ -24,21 +25,14 @@ var gGame = {
     secsPassed: 0
 }
 
-// 0 left 2 right
-// function WhichButton(event) {
-//     alert(event.button)
-//   }
 
 function initGame(gCurrSize) {
     gBoard = buildBoard(gCurrSize);
     console.log(gBoard);
     renderBoard(gBoard, '.board-container');
     createMines(gLevel);
-    renderMines();
-    console.log('negs count', setMinesNegsCount(gBoard, 1, 1));
-    console.log('negs count', setMinesNegsCount(gBoard, 3, 3));
-
     setMineCountToCell();
+
 
     gGame.isOn = true;
 }

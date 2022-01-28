@@ -43,7 +43,9 @@ function setMineCountToCell() {
         var cell = gBoard[cellLoc.i][cellLoc.j]
 
         // console.log('countMinesAroud',countMinesAroud , 'cellLoc.i',cellLoc.i,'cellLoc.j',cellLoc.j);
+        if (countMinesAroud === 0) countMinesAroud ='';
         cell.minesAroundCount = countMinesAroud;
+        
         renderCell(cellLoc, cell.minesAroundCount);
     }
 	console.log('gBoard', gBoard);

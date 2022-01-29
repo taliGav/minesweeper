@@ -2,8 +2,7 @@
 
 var gBoard;
 var gCurrSize;
-var gLevel;
-
+var gCurrLevel;
 
 var gLevels = [{
     SIZE: 4,
@@ -30,7 +29,7 @@ function initGame(gCurrSize) {
     gBoard = buildBoard(gCurrSize);
     console.log(gBoard);
     renderBoard(gBoard, '.board-container');
-    createMines(gLevel);
+    createMines(gCurrLevel);
     setMineCountToCell();
 
 
@@ -42,7 +41,7 @@ function initGame(gCurrSize) {
 
 function changeLevel(num) {
     gCurrSize = gLevels[num].SIZE;
-    gLevel = num;
+    gCurrLevel = num;
     initGame(gCurrSize)
     console.log(gBoard);
 }

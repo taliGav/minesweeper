@@ -4,9 +4,6 @@ const FLAG = '🚩';
 const BOMB = '💣';
 const EXPLOSION = '💥';
 
-
-
-
 function createMines(num=0) {
 	gMinesPos = [];
 	var minesLength = gLevels[num].MINES;
@@ -18,15 +15,13 @@ function createMines(num=0) {
 		gBoard[randI][randJ].isMine = true;
 
 		gMinesPos.push({ i: randI, j: randJ });
-		renderCell({i: randI, j: randJ}, BOMB);
+		// renderCell({i: randI, j: randJ}, BOMB);
 
 		console.log('mine' , gBoard[randI][randJ], 'i', randI,'j',randJ);
 	}
-
 	console.log('gBoard.length',gBoard.length);
 	console.log('minesLength', minesLength);
 	console.log('gMinesPos', gMinesPos);
 	console.log('gBoard', gBoard);
-
 }
 	

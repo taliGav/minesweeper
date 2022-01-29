@@ -19,7 +19,6 @@ function buildBoard(size = 4) {
 }
 
 
-
 function renderBoard(board, selector) {
   var strHTML = '<table border="0"><tbody>';
   for (var i = 0; i < board.length; i++) {
@@ -61,14 +60,3 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 }
-
-
-
-// oncontextmenu = "cellMarked(this, ${i}, ${j})";
-
-// function cellMarked(elCell, i, j){
-//   window.event.preventDefault()
-//   console.log('right',i, j);
-
-//   elCell.classList.toggle('cell-marked');
-// }

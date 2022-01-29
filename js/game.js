@@ -15,7 +15,6 @@ var gLevels = [{
     MINES: 30
 }];
 
-var gMinesPos = [];
 var gGame = {
     isOn: false,
     shownCount: 0,
@@ -23,6 +22,8 @@ var gGame = {
     secsPassed: 0
 }
 
+var gMinesPos = [];
+var gMines = [];
 
 function initGame(gCurrSize) {
     gGame = {
@@ -45,7 +46,7 @@ function firstClick(i, j) {
             if (gMinesPos[n].i === i && gMinesPos[n].j === j) {
                 cell.isMine = false;
                 cell.isShown = true;
-                var empties = getNoneMines();
+                var empties = getNoneMinesLocs();
                 var emptyLoc = empties[getRandomInt(0, empties.length - 1)];
                 var newBomb = gBoard[emptyLoc.i][emptyLoc.j]
                 newBomb.isMine = true;
@@ -66,7 +67,12 @@ function changeLevel(num) {
 
 
 function checkGameOver() {
-
+var markedMines = 0
+    for (var n = 0 ; n < gMines.length ; n++ ){
+        if (gMines[n].isMarked) markedMines++;
+    }
+    console.log('markedMines',markedMines);
+    if (gMines.length === markedMines) console.log('GAME OVER');
 }
 
 

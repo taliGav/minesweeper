@@ -16,6 +16,8 @@ function cellClicked(elCell, i, j) {
     gGame.shownCount++;
     console.log('gGame.shownCount', gGame.shownCount);
     elCell.classList.add('shown');
+
+    checkGameOver();
 }
 
 function cellMarked(elCell, i, j, event) {
@@ -28,6 +30,11 @@ function cellMarked(elCell, i, j, event) {
         cell.isMarked = false
         elCell.innerHTML = '';
     }
+
+    checkGameOver();
+
+    console.log('cell',cell);
+    console.log('gMines',gMines);
 }
 
 // function expandShown(board, elCell, i, j) {
@@ -35,9 +42,10 @@ function cellMarked(elCell, i, j, event) {
 // }
 
 function setMineCountToCell() {
-    var noneMinesCells = getNoneMines();
-    for (var i = 0; i < noneMinesCells.length; i++) {
-        var cellLoc = noneMinesCells[i]
+    var noneMinesLocs = getNoneMinesLocs();
+    console.log('noneMinesCells',noneMinesLocs);
+    for (var i = 0; i < noneMinesLocs.length; i++) {
+        var cellLoc = noneMinesLocs[i]
         // console.log ('cellLoc', cellLoc);
         var countMinesAroud = setMinesNegsCount(gBoard, cellLoc.i, cellLoc.j)
         var cell = gBoard[cellLoc.i][cellLoc.j]
@@ -49,6 +57,7 @@ function setMineCountToCell() {
     }
     console.log('gBoard', gBoard);
 }
+
 
 function setMinesNegsCount(gBoard, rowIdx, colIdx) {
     var count = 0;
@@ -65,18 +74,18 @@ function setMinesNegsCount(gBoard, rowIdx, colIdx) {
 }
 
 
-function getNoneMines() {
+function getNoneMinesLocs() {
     var res = [];
     for (var i = 0; i < gBoard.length; i++) {
         for (var j = 0; j < gBoard[0].length; j++) {
             var loc = { i: i, j: j }
             var currCell = gBoard[i][j];
+            // console.log('currCell',currCell);
             if (!currCell.isMine) res.push(loc);
-
         }
-        console.log('none mines locs', res);
-        return res;
     }
+    // console.log('none mines locs', res);
+    return res;
 }
 
 // function renderCells() {

@@ -27,7 +27,7 @@ function renderBoard(board, selector) {
     for (var j = 0; j < board[0].length; j++) {
       var cell = '';
       var className = 'cell cell-' + i + '-' + j;
-      strHTML += `<td onclick="cellClicked(this, ${i}, ${j})"class="cell ${className}"> ${cell} </td>`
+      strHTML += `<td onclick="cellClicked(this, ${i}, ${j})"class="cell ${className}" onmousedown="cellMarked(this,${i}, ${j},event)"> ${cell} </td>`
     }
     strHTML += '</tr>'
   }

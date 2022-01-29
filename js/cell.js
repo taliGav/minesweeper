@@ -1,14 +1,12 @@
 'use strict'
 
-
 function cellClicked(elCell, i, j) {
-    // 0 left 2 right
-    // function cellClicked(event) {
-    //     alert(event.button)
-    //   }
-
     var cell = gBoard[i][j];
+
+    if (gGame.shownCount === 0) firstClick(i, j)
+
     if (cell.isMine) {
+        elCell.classList.add('bomb');
         elCell.innerHTML = BOMB
     } else {
         elCell.innerHTML = cell.minesAroundCount;
@@ -16,34 +14,25 @@ function cellClicked(elCell, i, j) {
 
     cell.isShown = true;
     gGame.shownCount++;
-
+    console.log('gGame.shownCount', gGame.shownCount);
     elCell.classList.add('shown');
 }
 
-function cellMarked(elCell) {
+function cellMarked(elCell, i, j, event) {
+    var cell = gBoard[i][j];
 
+    if (event.button === 2 && !cell.isMarked) {
+        cell.isMarked = true
+        elCell.innerHTML = FLAG;
+    } else if (event.button === 2 && cell.isMarked) {
+        cell.isMarked = false
+        elCell.innerHTML = '';
+    }
 }
 
-function expandShown(board, elCell, i, j) {
+// function expandShown(board, elCell, i, j) {
 
-}
-
-// function renderCells() {
-//     for (var i = 0; i < gBoard.length; i++) {
-//         for (var j = 0; j < gBoard.length; j++) {
-
-//             var cell = gBoard[i][j]
-//             var currLoc = { i: i, j: j }
-
-//             if (cell.isMine) renderCell(currLoc, BOMB)
-
-//             if ((cell.minesAroundCount !== '') && (!cell.isMine)) {
-//                 renderCell(currLoc, cell.minesAroundCount)
-//             }
-//         }
-//     }
 // }
-
 
 function setMineCountToCell() {
     var noneMinesCells = getNoneMines();
@@ -83,8 +72,25 @@ function getNoneMines() {
             var loc = { i: i, j: j }
             var currCell = gBoard[i][j];
             if (!currCell.isMine) res.push(loc);
+
         }
+        console.log('none mines locs', res);
+        return res;
     }
-    console.log('none mines locs', res);
-    return res;
 }
+
+// function renderCells() {
+//     for (var i = 0; i < gBoard.length; i++) {
+//         for (var j = 0; j < gBoard.length; j++) {
+
+//             var cell = gBoard[i][j]
+//             var currLoc = { i: i, j: j }
+
+//             if (cell.isMine) renderCell(currLoc, BOMB)
+
+//             if ((cell.minesAroundCount !== '') && (!cell.isMine)) {
+//                 renderCell(currLoc, cell.minesAroundCount)
+//             }
+//         }
+//     }
+// }
